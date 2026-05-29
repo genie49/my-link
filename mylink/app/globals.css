@@ -1,0 +1,130 @@
+@import "tailwindcss";
+
+/* ── 마이링크 디자인 토큰 ──────────────────────────────
+   에디토리얼 감성: 따뜻한 크림 배경 · 잉크 블랙 · 토마토 레드 단일 액센트 */
+:root {
+  --paper: #f3ede1;
+  --paper-card: #fbf7ee;
+  --ink: #1c1813;
+  --ink-soft: #5c5246;
+  --line: #ddd1bd;
+  --tomato: #e8482b;
+  --tomato-deep: #c33a20;
+  --olive: #6b7150;
+}
+
+@theme inline {
+  --color-paper: var(--paper);
+  --color-paper-card: var(--paper-card);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-line: var(--line);
+  --color-tomato: var(--tomato);
+  --color-tomato-deep: var(--tomato-deep);
+  --color-olive: var(--olive);
+
+  --font-sans: var(--font-noto-sans);
+  --font-display: var(--font-fraunces);
+  --font-serif-kr: var(--font-noto-serif);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  /* 종이 질감: 미세한 노이즈 + 따뜻한 광원 */
+  background-image:
+    radial-gradient(
+      120% 80% at 85% -10%,
+      rgba(232, 72, 43, 0.07) 0%,
+      transparent 55%
+    ),
+    radial-gradient(
+      90% 70% at 0% 110%,
+      rgba(107, 113, 80, 0.08) 0%,
+      transparent 50%
+    );
+  background-attachment: fixed;
+}
+
+/* 입자 텍스처 오버레이 */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 50;
+  opacity: 0.4;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.35'/%3E%3C/svg%3E");
+}
+
+.font-display {
+  font-family: var(--font-display), Georgia, serif;
+}
+.font-serif-kr {
+  font-family: var(--font-serif-kr), var(--font-display), serif;
+}
+
+/* ── 진입 애니메이션 ── */
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes drawline {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes floaty {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-1.5deg);
+  }
+  50% {
+    transform: translateY(-10px) rotate(-1.5deg);
+  }
+}
+
+.reveal {
+  opacity: 0;
+  animation: rise 0.85s cubic-bezier(0.2, 0.7, 0.2, 1) forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    animation: none;
+    opacity: 1;
+  }
+  body::before {
+    display: none;
+  }
+}
+
+/* 마키 (도구 스택 흐름) */
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+.marquee-track {
+  animation: marquee 22s linear infinite;
+}
