@@ -40,7 +40,7 @@ npm start
 
 Vercel을 통해 전 세계 어디서든 접속할 수 있도록 배포되었습니다.
 
-- **라이브 주소:** _(배포 후 업데이트)_
+- **라이브 주소:** https://my-link-kappa-silk.vercel.app
 
 ---
 
